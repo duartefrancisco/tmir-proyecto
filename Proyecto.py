@@ -10,12 +10,10 @@ def detect(gray, frame):
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0,0, 255), 3)
         roi_gray = gray[y: y + h, x : x + w]
-        roi_color = frame[y: y + h, x : x + w]
-        #cv2.imshow("ROI", roi_gray)
-        #cv2.imshow("ROI", roi_color)
+        
         smiles = smile_cascade.detectMultiScale(roi_gray, 1.8, 20)
         for (sx, sy, sw, sh) in smiles:
-          #  cv2.rectangle(roi_color, (sx, sy), (sx + sw, sy + sh), (0,0, 255), 3)
+          #  cv2.rectangle(roi_gray, (sx, sy), (sx + sw, sy + sh), (0,0, 255), 3)
           cv2.rectangle(frame, (x, y), (x + w, y + h), (0,255, 0), 3)
           cv2.putText(frame, "Sonriendo", (x+sx, y+sy+sh), fontScale = 1, fontFace = cv2.FONT_HERSHEY_TRIPLEX, color= (255,255,255))
 
